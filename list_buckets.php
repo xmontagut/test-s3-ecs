@@ -32,19 +32,26 @@ if ( $opts['e'] ) {
 $credentials = CredentialProvider::env();
 // $credentials = new Credentials(getenv('AWS_ACCESS_KEY_ID'), getenv('AWS_SECRET_ACCESS_KEY'));
 
-$s3client = new S3Client(array(
-    'version' => $S3_VERSION,
-    'region' => $region,
-    'endpoint' => $endpoint,
-    'credentials' => $credentials,
-    'use_aws_shared_config_files' => false,
-    'use_path_style_endpoint' => true,
-    'debug' => true,
-));
+try {
+	$s3client = new S3Client(array(
+	    'version' => $S3_VERSION,
+	    'region' => $region,
+	    'endpoint' => $endpoint,
+	    'credentials' => $credentials,
+	    'use_aws_shared_config_files' => false,
+	    'use_path_style_endpoint' => true,
+	    'debug' => true,
+	));
+} catch (Exception $e) {
+	fwrite(STDERR, "Erreur de connexion au S3 : " . $e->getMessage() . "\n");
+	exit(2);
+}
 
-
-$results = $s3client->listBuckets();
-var_dump($results);
-
-
-echo "Successfully ran the Amazon S3 with PHP demo.\n";
+try {
+	$results = $s3client->listBuckets();
+	var_dump($results);
+	echo "Successfully ran the Amazon S3 with PHP demo.\n";
+} catch (Exception $e) {
+	fwrite(STDERR, "Erreur pour accéder au listing des buckets : " . $e->getMessage() . "\n");
+	exit(3);
+}
