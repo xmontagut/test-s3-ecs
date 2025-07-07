@@ -5,7 +5,12 @@ Test accès bucket S3 de Dell ECS avec le SDK Amazon pour PHP
 Le code teste si on peut lister les buckets une fois connecté.
 
 ## Pré-requis
-Disposer de PHP avec module XML.
+Disposer de PHP en mode CLI avec module XML (Curl optionnel).
+
+Sous famille Debian / Ubuntu :
+```bash
+sudo apt install php-cli php-xml php-curl
+```
 
 ## Procédure de test
 

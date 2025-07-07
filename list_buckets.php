@@ -18,7 +18,6 @@ $region = 'us-east-1';
 $S3_VERSION = '2006-03-01';
 
 
-// $endpoint="https://lim.s3.spesr-na.fr";
 $opts = getOpt('e:', array('endpoint:')); 
 
 if ( $opts['e'] ) {
